@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:decorate xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:p="http://primefaces.org/ui"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+             template="template.xhtml"
+             xmlns:sccomp="http://xmlns.jcp.org/jsf/composite/sccomp">
+
+    <h:form>
+     <p:messages autoUpdate="true" showDetail="true"></p:messages>
+        <p:fieldset legend="CD's" >
+            
+            <sccomp:toolbarCrud crudBean="#{cdBean}"></sccomp:toolbarCrud>
+            
+            <p:panelGrid columns="2" rendered="#{cdBean.busca == false}">
+
+                <h:outputLabel value="Artista"></h:outputLabel>
+                <p:inputText value="#{cdBean.entidade.artista}"></p:inputText>
+
+                <h:outputLabel value="Ano de Lançamento"></h:outputLabel>
+                <p:inputText value="#{cdBean.entidade.lancamento}"></p:inputText>
+                
+                <h:outputLabel value="Gênero"></h:outputLabel>
+                <p:inputText value="#{cdBean.entidade.genero}"></p:inputText>
+                
+                <h:outputLabel value="Duração(Minutos)"></h:outputLabel>
+                <p:inputText value="#{cdBean.entidade.duracaoMinutos}"></p:inputText>
+                
+                <h:outputLabel value="Nome do CD"></h:outputLabel>
+                <p:inputText value="#{cdBean.entidade.nome}"></p:inputText>
+                
+                
+            </p:panelGrid>
+        </p:fieldset>
+     
+     <p:dataTable value="#{cdBean.entidades}" var="cd" rendered="#{cdBean.busca == true}">
+                
+                <p:column>
+                    <p:commandButton value="Editar" action="#{cdBean.editar(cd)}" update="@form"></p:commandButton>
+                    <p:commandButton value="Deletar" action="#{cdBean.deletar(cd)}" update="@form"></p:commandButton>
+                </p:column>
+
+                <p:column headerText="Artista" sortBy="#{cd.artista}">
+                    <h:outputText value="#{cd.artista}" ></h:outputText>
+                </p:column>
+
+                <p:column headerText="Data de Lançamento" sortBy="#{cd.lancamento}">
+                    <h:outputText value="#{cd.lancamento}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="Gênero" sortBy="#{cd.genero}">
+                    <h:outputText value="#{cd.genero}"></h:outputText>
+                </p:column>
+         
+                <p:column headerText="Duração(Minutos)" sortBy="#{cd.duracaoMinutos}">
+                    <h:outputText value="#{cd.duracaoMinutos}"></h:outputText>
+                </p:column>
+         
+                <p:column headerText="Nome do CD" sortBy="#{cd.nome}">
+                    <h:outputText value="#{cd.nome}"></h:outputText>
+                </p:column>
+         
+            </p:dataTable>    
+     
+    </h:form>
+
+
+</ui:decorate>
